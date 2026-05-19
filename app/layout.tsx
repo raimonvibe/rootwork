@@ -18,6 +18,8 @@ const plusJakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
+const SITE_URL = "https://rootwork-teal.vercel.app";
+
 const siteDescription =
   "Practical, compassionate information for people navigating the world of work with strength, self-awareness, and trusted guidance.";
 
@@ -28,11 +30,14 @@ function getMetadataBase(): URL {
   if (process.env.VERCEL_URL) {
     return new URL(`https://${process.env.VERCEL_URL}`);
   }
-  return new URL("http://localhost:3000");
+  return new URL(SITE_URL);
 }
 
 export const metadata: Metadata = {
   metadataBase: getMetadataBase(),
+  alternates: {
+    canonical: "/",
+  },
   title: {
     default: "Rootwork — Supportive Employment Information",
     template: "%s | Rootwork",

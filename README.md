@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌱 Rootwork
 
-## Getting Started
+**🌐 Live site:** [https://rootwork-teal.vercel.app/](https://rootwork-teal.vercel.app/)
 
-First, run the development server:
+![Rootwork mascot — ginger root logo](public/root.png)
+
+---
+
+## 💬 What is Rootwork?
+
+Rootwork is a **compassionate, strengths-based** information website for people exploring **work and employment** — especially those reflecting on how **early life experiences** can shape trust, communication, and confidence in the workplace.
+
+✨ **Warm and clear** — not clinical, not overwhelming  
+📚 **Cited sources** — links to trusted public organizations  
+🎧 **Listen button** — read-aloud powered by your browser (no account needed)  
+📱 **Works on mobile** — add to your home screen with the ginger icon  
+
+> *"You've come a long way. Now let's move forward."*
+
+---
+
+## 🗂️ Pages
+
+| Page | Path |
+|------|------|
+| Home | `/` |
+| About | `/about` |
+| How early experiences shape work | `/experience-and-work` |
+| For job seekers | `/for-individuals` |
+| For employers & HR | `/for-employers` |
+| Trusted sources | `/resources` |
+| Privacy | `/privacy` |
+
+---
+
+## 🛠️ Tech stack
+
+- [Next.js 14](https://nextjs.org/) (App Router)
+- TypeScript · Tailwind CSS · Framer Motion · Lucide icons
+- Deployed on [Vercel](https://vercel.com/)
+
+---
+
+## 🚀 Run locally
 
 ```bash
+npm install
+cp .env.example .env.local   # optional — sets production URL for OG previews
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🖼️ Assets (`public/`)
 
-## Learn More
+| File | Purpose |
+|------|---------|
+| `favicon.ico` | Browser tab icon |
+| `social.png` | Link previews (Open Graph / Twitter / messaging apps) |
+| `apple-touch-icon.png` | Phone home screen icon |
+| `ginger.png` | Site background texture |
+| `root.png` | Brand mascot (README & docs) |
 
-To learn more about Next.js, take a look at the following resources:
+Set **`NEXT_PUBLIC_SITE_URL=https://rootwork-teal.vercel.app`** in Vercel environment variables so share previews use the correct domain.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📦 Repository
 
-## Deploy on Vercel
+[github.com/raimonvibe/rootwork](https://github.com/raimonvibe/rootwork)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ⚠️ Disclaimer
+
+Rootwork provides **general information only** and is not a substitute for professional mental health, medical, or legal advice.
