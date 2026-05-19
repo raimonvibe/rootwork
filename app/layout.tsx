@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { DM_Serif_Display, Plus_Jakarta_Sans } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ReadAloudToolbar from "@/components/ReadAloudToolbar";
 import "./globals.css";
 
 const dmSerif = DM_Serif_Display({
@@ -91,6 +92,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <ReadAloudToolbar />
       </body>
     </html>
   );

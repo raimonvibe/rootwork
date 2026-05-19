@@ -70,4 +70,9 @@
   .transition-smooth {
     transition: all 0.3s ease;
   }
+
+  .read-aloud-active {
+    @apply rounded-lg bg-root-coral/15 ring-2 ring-root-coral/40;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
 }
