@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Share2 } from "lucide-react";
+import SocialLinks from "@/components/SocialLinks";
 
 const footerLinks = [
   { href: "/", label: "Home" },
@@ -12,25 +12,18 @@ export default function Footer() {
   return (
     <footer className="mt-auto border-t border-root-dark/10 gradient-navy">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
-          <div className="max-w-md">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+          <div className="max-w-md lg:col-span-1">
             <p className="font-display text-2xl text-root-light">Rootwork</p>
-            <p className="mt-2 text-sm text-root-light/70">
+            <p className="mt-2 text-sm leading-relaxed text-root-light/70">
               Practical, compassionate information for people building confidence
               and success in the world of work.
             </p>
-            <a
-              href="/"
-              className="mt-4 inline-flex min-h-10 items-center gap-2 rounded-full bg-white/10 px-4 text-sm text-root-light transition-smooth hover:bg-white/20"
-              aria-label="Share Rootwork"
-            >
-              <Share2 className="h-4 w-4" />
-              Share this resource
-            </a>
           </div>
 
-          <nav aria-label="Footer navigation">
-            <ul className="flex flex-wrap gap-x-6 gap-y-2">
+          <nav aria-label="Footer navigation" className="lg:justify-self-center">
+            <p className="text-sm font-medium text-root-light/90">Quick links</p>
+            <ul className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-6">
               {footerLinks.map((link) => (
                 <li key={link.href}>
                   <Link
@@ -43,18 +36,22 @@ export default function Footer() {
               ))}
             </ul>
           </nav>
+
+          <SocialLinks className="md:col-span-2 lg:col-span-1 lg:justify-self-end" />
         </div>
 
-        <p className="mt-8 text-xs leading-relaxed text-root-light/50">
-          This website provides general information only and is not a substitute
-          for professional mental health or medical advice.
-        </p>
-        <p className="mt-2 text-xs text-root-light/40">
-          Information sourced from publicly available, reputable organizations.
-        </p>
-        <p className="mt-4 text-xs text-root-light/30">
-          © {new Date().getFullYear()} Rootwork. All rights reserved.
-        </p>
+        <div className="mt-10 border-t border-root-light/10 pt-8">
+          <p className="text-xs leading-relaxed text-root-light/50">
+            This website provides general information only and is not a substitute
+            for professional mental health or medical advice.
+          </p>
+          <p className="mt-2 text-xs text-root-light/40">
+            Information sourced from publicly available, reputable organizations.
+          </p>
+          <p className="mt-4 text-center text-sm text-root-light/30">
+            © {new Date().getFullYear()} Rootwork. All rights reserved.
+          </p>
+        </div>
       </div>
     </footer>
   );
