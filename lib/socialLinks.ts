@@ -45,6 +45,7 @@ export const raimonSocialLinks: SocialLink[] = [
     label: "Medium",
     iconClass: "fa-brands fa-medium",
     brandColor: "#00ab6c",
+    hoverColor: "#00ab6c",
   },
   {
     id: "github",

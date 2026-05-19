@@ -20,6 +20,7 @@ export default function SocialLinks({
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
+              data-social={link.id}
               className="social-link group flex min-h-11 min-w-11 items-center justify-center rounded-card border border-root-light/15 bg-root-light/10 transition-smooth"
               style={
                 {

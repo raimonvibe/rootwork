@@ -81,7 +81,8 @@
     --brand-hover: var(--brand);
   }
 
-  .social-link i {
+  .social-link i,
+  .social-link i::before {
     color: var(--brand);
   }
 
@@ -90,7 +91,18 @@
     border-color: var(--brand-hover);
   }
 
-  .social-link:hover i {
+  .social-link:hover i,
+  .social-link:hover i::before {
     color: #fff;
+  }
+
+  .social-link[data-social="x"] {
+    --brand: #ffffff;
+    --brand-hover: #000000;
+  }
+
+  .social-link[data-social="medium"] {
+    --brand: #00ab6c;
+    --brand-hover: #00ab6c;
   }
 }
