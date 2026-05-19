@@ -2,7 +2,7 @@
 
 **🌐 Live site:** [https://rootwork-teal.vercel.app/](https://rootwork-teal.vercel.app/)
 
-![Rootwork mascot — ginger root logo](public/root.png)
+![Rootwork mascot — ginger root logo](root.png)
 
 ---
 
@@ -61,7 +61,7 @@ Open [http://localhost:3000](http://localhost:3000).
 | `social.png` | Link previews (Open Graph / Twitter / messaging apps) |
 | `apple-touch-icon.png` | Phone home screen icon |
 | `ginger.png` | Site background texture |
-| `root.png` | Brand mascot (README & docs) |
+| `root.png` (project root) | Brand mascot (README & docs) |
 
 Set **`NEXT_PUBLIC_SITE_URL=https://rootwork-teal.vercel.app`** in Vercel environment variables so share previews use the correct domain.
 
