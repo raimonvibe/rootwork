@@ -13,7 +13,7 @@ import {
   mainNav,
   topicNav,
   resourceNav,
-  crisisSupport,
+  additionalSupport,
 } from "@/lib/navigation";
 
 type HamburgerMenuProps = {
@@ -79,7 +79,7 @@ export default function HamburgerMenu({ isOpen, onClose }: HamburgerMenuProps) {
             <nav className="flex-1 overflow-y-auto px-4 py-6">
               <NavSection items={mainNav} onNavigate={onClose} />
 
-              <SectionLabel>Understanding Trauma & Work</SectionLabel>
+              <SectionLabel>Understanding Roots & Work</SectionLabel>
               <NavSection items={topicNav} onNavigate={onClose} />
 
               <SectionLabel>Resources</SectionLabel>
@@ -111,7 +111,7 @@ export default function HamburgerMenu({ isOpen, onClose }: HamburgerMenuProps) {
                         These resources are here if you need them — no pressure.
                       </p>
                       <ul className="space-y-1 px-1">
-                        {crisisSupport.map((item) => (
+                        {additionalSupport.map((item) => (
                           <li key={item.name}>
                             <a
                               href={item.href}

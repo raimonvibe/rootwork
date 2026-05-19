@@ -9,47 +9,47 @@ export const trustedSources: Source[] = [
     name: "SAMHSA",
     url: "https://www.samhsa.gov/",
     description:
-      "US authority on trauma, mental health, and substance use resources.",
+      "US authority on mental health, wellbeing, and recovery resources.",
   },
   {
     name: "CDC — ACE Study",
     url: "https://www.cdc.gov/violenceprevention/aces/index.html",
     description:
-      "Foundational research on adverse childhood experiences (ACEs).",
+      "Foundational research on early childhood experiences and lifelong health.",
   },
   {
     name: "WorkforceGPS",
     url: "https://workforcegps.org/",
     description:
-      "US Dept. of Labor workforce resources integrating trauma-informed care.",
+      "US Dept. of Labor workforce resources for supportive, inclusive employment.",
   },
   {
     name: "CTIPP Toolkit",
     url: "https://ctipp.org/",
-    description: "Trauma-Informed Workplaces Toolkit (2025 edition).",
+    description: "Supportive Workplaces Toolkit (2025 edition).",
   },
   {
     name: "NCBI / PubMed",
     url: "https://www.ncbi.nlm.nih.gov/",
     description:
-      "Peer-reviewed research on trauma and occupational functioning.",
+      "Peer-reviewed research on wellbeing and occupational functioning.",
   },
   {
     name: "National Youth Employment Coalition",
     url: "https://www.nyec.org/",
-    description: "Youth employment trauma-informed best practices.",
+    description: "Youth employment best practices for supportive workplaces.",
   },
   {
     name: "Psychology Today",
     url: "https://www.psychologytoday.com/",
     description:
-      "Accessible articles on childhood trauma and workplace dynamics.",
+      "Accessible articles on early experiences and workplace dynamics.",
   },
   {
     name: "BSR",
     url: "https://www.bsr.org/",
     description:
-      "Business case for trauma-informed employment and workplace culture.",
+      "Business case for supportive employment and inclusive workplace culture.",
   },
 ];
 

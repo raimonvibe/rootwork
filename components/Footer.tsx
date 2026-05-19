@@ -16,8 +16,8 @@ export default function Footer() {
           <div className="max-w-md">
             <p className="font-display text-2xl text-root-light">Rootwork</p>
             <p className="mt-2 text-sm text-root-light/70">
-              Practical, compassionate information for people with trauma histories
-              navigating the world of work.
+              Practical, compassionate information for people building confidence
+              and success in the world of work.
             </p>
             <a
               href="/"

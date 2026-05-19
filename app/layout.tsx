@@ -19,15 +19,15 @@ const plusJakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "Rootwork — Trauma-Informed Employment Information",
+    default: "Rootwork — Supportive Employment Information",
     template: "%s | Rootwork",
   },
   description:
-    "Practical, compassionate information for people with trauma histories navigating the world of work.",
+    "Practical, compassionate information for people navigating the world of work with strength, self-awareness, and trusted guidance.",
   openGraph: {
     title: "Rootwork",
     description:
-      "Practical, compassionate information for people with trauma histories navigating the world of work.",
+      "Practical, compassionate information for people navigating the world of work with strength, self-awareness, and trusted guidance.",
     type: "website",
     siteName: "Rootwork",
   },

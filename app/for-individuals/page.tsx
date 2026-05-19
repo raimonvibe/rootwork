@@ -5,7 +5,7 @@ import ContentSection from "@/components/ContentSection";
 export const metadata: Metadata = {
   title: "For Job Seekers",
   description:
-    "Practical strategies for people with trauma histories navigating interviews, managers, and workplace dynamics.",
+    "Practical strategies for navigating interviews, managers, and workplace dynamics with confidence.",
 };
 
 export default function ForIndividualsPage() {
@@ -13,19 +13,19 @@ export default function ForIndividualsPage() {
     <>
       <PageHeader
         title="For Job Seekers"
-        description="Practical guidance for navigating work when authority, feedback, or unpredictability feel especially hard."
+        description="Practical guidance for navigating work when authority, feedback, or unpredictability need extra care and planning."
       />
       <div className="mx-auto max-w-6xl space-y-8 px-4 pb-20 sm:px-6 lg:px-8">
-        <ContentSection title="Understanding your triggers at work" index={0}>
+        <ContentSection title="Recognizing your stress points at work" index={0}>
           <p>
-            Common workplace triggers tied to authority trauma include: unexpected
+            Common workplace moments that deserve extra awareness include: unexpected
             meetings with managers, performance reviews, being cc&apos;d on critical
-            emails, loud or chaotic environments, and unclear expectations.
+            emails, busy or noisy environments, and unclear expectations.
           </p>
           <p>
-            Self-awareness tools — journaling after difficult days, noting physical
+            Self-awareness tools — journaling after demanding days, noticing physical
             sensations (tight chest, racing thoughts), and identifying patterns — help
-            you prepare rather than blame yourself when reactions arise.
+            you prepare and respond with intention when strong feelings arise.
           </p>
         </ContentSection>
 
@@ -39,12 +39,12 @@ export default function ForIndividualsPage() {
             <li>
               <strong>Communicating needs:</strong> You can ask for written agendas,
               24-hour notice for feedback meetings, or quiet workspace — without
-              disclosing your full history.
+              sharing more than you choose.
             </li>
             <li>
               <strong>Building trust with supervisors:</strong> Start small — reliable
               follow-through on low-stakes tasks before sharing more personal context
-              if you choose to.
+              if you want to.
             </li>
           </ul>
         </ContentSection>
@@ -58,10 +58,10 @@ export default function ForIndividualsPage() {
           }}
         >
           <p>
-            Trauma can also develop real strengths: resilience under pressure,
-            empathy for colleagues, adaptability in crisis, and deep commitment when
-            you feel psychologically safe. Framing your history as context — not a
-            deficit — shifts how you show up in interviews and on the job.
+            Life experience can also build real strengths: resilience under pressure,
+            empathy for colleagues, adaptability when things shift, and deep commitment
+            when you feel psychologically safe. Framing your story as context — not a
+            limitation — shifts how you show up in interviews and on the job.
           </p>
         </ContentSection>
 
@@ -75,7 +75,7 @@ export default function ForIndividualsPage() {
         >
           <p>
             Programs like Mobility Mentoring (Center for Working Families), the
-            National Youth Employment Coalition, and WorkforceGPS offer trauma-informed
+            National Youth Employment Coalition, and WorkforceGPS offer supportive
             workforce development resources. Explore our{" "}
             <a href="/resources" className="font-medium text-root-coral hover:underline">
               trusted sources page

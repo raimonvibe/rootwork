@@ -5,7 +5,7 @@ import ContentSection from "@/components/ContentSection";
 export const metadata: Metadata = {
   title: "For Employers & HR",
   description:
-    "Guidance on building trauma-informed hiring practices and supportive workplace cultures.",
+    "Guidance on building welcoming hiring practices and supportive workplace cultures.",
 };
 
 export default function ForEmployersPage() {
@@ -13,11 +13,11 @@ export default function ForEmployersPage() {
     <>
       <PageHeader
         title="For Employers & HR"
-        description="Creating workplaces where people with trauma histories can contribute fully — and why it benefits your organization."
+        description="Creating workplaces where people from all backgrounds can contribute fully — and why it benefits your organization."
       />
       <div className="mx-auto max-w-6xl space-y-8 px-4 pb-20 sm:px-6 lg:px-8">
         <ContentSection
-          title="What is a trauma-informed workplace?"
+          title="What is a supportive workplace?"
           index={0}
           source={{
             name: "CTIPP & SAMHSA",
@@ -25,43 +25,43 @@ export default function ForEmployersPage() {
           }}
         >
           <p>
-            A trauma-informed workplace recognizes that many employees carry histories
-            that affect how they experience hierarchy, feedback, and stress. SAMHSA&apos;s
-            six principles — safety, trustworthiness, peer support, collaboration,
-            empowerment, and cultural humility — provide a framework for policy and
-            daily practice.
+            A supportive workplace recognizes that many employees bring varied life
+            experiences that shape how they relate to hierarchy, feedback, and stress.
+            SAMHSA&apos;s six principles — safety, trustworthiness, peer support,
+            collaboration, empowerment, and cultural humility — provide a framework
+            for policy and daily practice.
           </p>
           <p>
-            The CTIPP Trauma-Informed Workplaces Toolkit (2025) offers actionable
-            guidance for leaders implementing these ideas organization-wide.
+            The CTIPP Supportive Workplaces Toolkit (2025) offers actionable guidance
+            for leaders implementing these ideas organization-wide.
           </p>
         </ContentSection>
 
         <ContentSection
-          title="Trauma-informed hiring practices"
+          title="Welcoming hiring practices"
           index={1}
           source={{
-            name: "NCBI Bookshelf — Trauma-Informed Workforce",
+            name: "NCBI Bookshelf — Supportive Workforce",
             url: "https://www.ncbi.nlm.nih.gov/books/",
           }}
         >
           <ul className="list-disc space-y-2 pl-5">
             <li>Reduce unnecessary power imbalances in interviews — explain the process upfront.</li>
             <li>Offer clear timelines and predictable next steps.</li>
-            <li>Avoid trick questions or adversarial panel formats when possible.</li>
+            <li>Favor clear, respectful conversation over high-pressure formats when possible.</li>
             <li>Provide written job expectations and onboarding schedules from day one.</li>
           </ul>
         </ContentSection>
 
         <ContentSection title="Supporting employees day-to-day" index={2}>
           <p>
-            Psychological safety means people can ask questions, admit mistakes, and
-            raise concerns without fear of humiliation. Deliver feedback in private,
-            focus on specific behaviors, and allow time to process before expecting
-            immediate agreement.
+            Psychological safety means people can ask questions, learn from mistakes,
+            and raise concerns with confidence. Deliver feedback in private, focus on
+            specific behaviors, and allow time to process before expecting immediate
+            agreement.
           </p>
           <p>
-            Shame-based criticism often re-triggers trauma responses and reduces
+            Harsh or discouraging criticism can shut people down and reduce
             performance — while clear, respectful feedback builds loyalty and growth.
           </p>
         </ContentSection>
@@ -75,9 +75,10 @@ export default function ForEmployersPage() {
           }}
         >
           <p>
-            Trauma-informed practices correlate with reduced turnover, higher employee
-            engagement, and access to a broader, more diverse talent pool. Investing
-            in psychological safety is not only ethical — it is strategically sound.
+            Supportive workplace practices correlate with reduced turnover, higher
+            employee engagement, and access to a broader, more diverse talent pool.
+            Investing in psychological safety is not only thoughtful — it is
+            strategically sound.
           </p>
         </ContentSection>
       </div>

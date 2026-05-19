@@ -21,8 +21,8 @@ export const mainNav: NavItem[] = [
 
 export const topicNav: NavItem[] = [
   {
-    href: "/trauma-and-work",
-    label: "How Trauma Affects Employment",
+    href: "/experience-and-work",
+    label: "How Early Experiences Shape Work",
     icon: Brain,
   },
   { href: "/for-individuals", label: "For Job Seekers", icon: Briefcase },
@@ -37,7 +37,7 @@ export const resourceNav: NavItem[] = [
   },
 ];
 
-export const crisisSupport = [
+export const additionalSupport = [
   {
     name: "988 Suicide & Crisis Lifeline",
     description: "Call or text 988 (US)",
@@ -50,7 +50,7 @@ export const crisisSupport = [
   },
   {
     name: "SAMHSA National Helpline",
-    description: "1-800-662-4357 — substance use & mental health support",
+    description: "1-800-662-4357 — mental health and recovery support",
     href: "tel:18006624357",
   },
   {

@@ -7,12 +7,12 @@ export default function HomePage() {
   return (
     <>
       <HeroSection
-        headline="You've carried it far enough. Now let's move forward."
-        subheading="Practical, compassionate information for people with trauma histories navigating the world of work."
+        headline="You've come a long way. Now let's move forward."
+        subheading="Practical, compassionate information for people building confidence and success in the world of work."
         primaryCta={{ label: "Explore Resources", href: "/resources" }}
         secondaryCta={{
-          label: "Learn How Trauma Affects Work",
-          href: "/trauma-and-work",
+          label: "How Early Experiences Shape Work",
+          href: "/experience-and-work",
         }}
       />
 
@@ -27,9 +27,9 @@ export default function HomePage() {
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <InfoCard
             icon="brain"
-            title="Understanding the Impact"
-            description="How childhood trauma with authority figures shapes workplace behavior, trust, and stress responses."
-            href="/trauma-and-work"
+            title="Understanding the Connection"
+            description="How early experiences with authority figures can shape workplace trust, communication, and stress responses."
+            href="/experience-and-work"
             index={0}
           />
           <InfoCard
@@ -42,7 +42,7 @@ export default function HomePage() {
           <InfoCard
             icon="building2"
             title="For Employers"
-            description="How to create trauma-informed hiring and workplace environments that support everyone."
+            description="How to create welcoming, supportive hiring and workplace environments for everyone."
             href="/for-employers"
             index={2}
           />

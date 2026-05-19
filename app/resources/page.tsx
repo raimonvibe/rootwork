@@ -6,7 +6,7 @@ import { trustedSources } from "@/lib/sources";
 export const metadata: Metadata = {
   title: "Trusted Sources",
   description:
-    "Reputable organizations and publicly available resources on trauma, employment, and workplace wellbeing.",
+    "Reputable organizations and publicly available resources on employment, wellbeing, and workplace culture.",
 };
 
 export default function ResourcesPage() {
