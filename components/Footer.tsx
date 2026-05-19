@@ -51,6 +51,18 @@ export default function Footer() {
           <p className="mt-4 text-center text-sm text-root-light/30">
             © {new Date().getFullYear()} Rootwork. All rights reserved.
           </p>
+          <p className="mt-2 text-center text-sm text-root-light/40">
+            <a
+              href="https://raimonvibe.eu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-smooth hover:text-root-light"
+            >
+              raimonvibe.eu
+            </a>
+            {" "}
+            © {new Date().getFullYear()}
+          </p>
         </div>
       </div>
     </footer>
