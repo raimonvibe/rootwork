@@ -4,25 +4,82 @@ export type ReadChunk = {
   element: HTMLElement;
 };
 
+const BLOCK_SELECTOR =
+  "[data-read-aloud-block], article, section.rounded-card";
+
 const READABLE_SELECTOR =
-  "h1, h2, h3, h4, p, li, blockquote, [data-read-aloud]";
+  "h1, h2, h3, h4, p, li, blockquote";
 
-const IGNORE_SELECTOR = "[data-read-aloud-ignore], nav, footer, button, a";
+const IGNORE_ANCESTOR =
+  "[data-read-aloud-ignore], nav, footer, header, button";
 
+function isIgnored(el: HTMLElement): boolean {
+  if (el.closest(IGNORE_ANCESTOR)) return true;
+  const anchor = el.closest("a");
+  // Allow full card/link blocks; skip inline text links inside paragraphs
+  if (anchor && !anchor.matches(BLOCK_SELECTOR) && !anchor.hasAttribute("data-read-aloud-block")) {
+    return true;
+  }
+  return false;
+}
+
+function extractText(element: HTMLElement): string {
+  const clone = element.cloneNode(true) as HTMLElement;
+  clone
+    .querySelectorAll(
+      "[data-read-aloud-ignore], button, svg, [aria-hidden='true']",
+    )
+    .forEach((node) => node.remove());
+  return clone.innerText.replace(/\s+/g, " ").trim();
+}
+
+function compareDocumentOrder(a: HTMLElement, b: HTMLElement): number {
+  const position = a.compareDocumentPosition(b);
+  if (position & Node.DOCUMENT_POSITION_FOLLOWING) return -1;
+  if (position & Node.DOCUMENT_POSITION_PRECEDING) return 1;
+  return 0;
+}
+
+/** One utterance per card/section; standalone headings outside blocks read individually */
 export function getReadableChunks(root: HTMLElement): ReadChunk[] {
-  const elements = Array.from(
-    root.querySelectorAll<HTMLElement>(READABLE_SELECTOR),
-  ).filter((el) => {
-    if (el.closest(IGNORE_SELECTOR)) return false;
-    const text = el.innerText.replace(/\s+/g, " ").trim();
-    return text.length > 0;
-  });
+  const blocks = Array.from(root.querySelectorAll<HTMLElement>(BLOCK_SELECTOR))
+    .filter((el) => !isIgnored(el))
+    .filter((el, _, arr) =>
+      arr.every((other) => other === el || !other.contains(el)),
+    )
+    .sort(compareDocumentOrder);
 
-  return elements.map((element, index) => ({
-    index,
-    element,
-    text: element.innerText.replace(/\s+/g, " ").trim(),
-  }));
+  const claimed = new Set<HTMLElement>();
+  const chunks: ReadChunk[] = [];
+
+  for (const block of blocks) {
+    const text = extractText(block);
+    if (!text) continue;
+    chunks.push({ index: chunks.length, text, element: block });
+    claimed.add(block);
+    block.querySelectorAll<HTMLElement>(READABLE_SELECTOR).forEach((el) => {
+      claimed.add(el);
+    });
+  }
+
+  const standalone = Array.from(
+    root.querySelectorAll<HTMLElement>(READABLE_SELECTOR),
+  )
+    .filter((el) => {
+      if (isIgnored(el)) return false;
+      if (claimed.has(el)) return false;
+      if (el.closest(BLOCK_SELECTOR)) return false;
+      return extractText(el).length > 0;
+    })
+    .sort(compareDocumentOrder);
+
+  for (const el of standalone) {
+    const text = extractText(el);
+    if (!text) continue;
+    chunks.push({ index: chunks.length, text, element: el });
+  }
+
+  return chunks;
 }
 
 export function getSelectionChunk(): ReadChunk | null {
@@ -34,7 +91,9 @@ export function getSelectionChunk(): ReadChunk | null {
 
   const anchor = selection.anchorNode?.parentElement;
   const element =
-    anchor?.closest<HTMLElement>(READABLE_SELECTOR) ?? document.createElement("p");
+    anchor?.closest<HTMLElement>(`${BLOCK_SELECTOR}, ${READABLE_SELECTOR}`) ??
+    anchor ??
+    document.body;
 
   return { index: 0, text, element };
 }
@@ -47,9 +106,9 @@ export function clearChunkHighlights(root: HTMLElement) {
 }
 
 export function highlightChunk(element: HTMLElement) {
-  clearChunkHighlights(
-    element.closest("main") ?? document.getElementById("main-content")!,
-  );
+  const main =
+    element.closest("main") ?? document.getElementById("main-content");
+  if (main) clearChunkHighlights(main);
   element.setAttribute("data-read-chunk-active", "true");
   element.classList.add("read-aloud-active");
   element.scrollIntoView({ behavior: "smooth", block: "center" });

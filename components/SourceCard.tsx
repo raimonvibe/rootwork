@@ -21,7 +21,10 @@ export default function SourceCard({
   alternateLabel,
 }: SourceCardProps) {
   return (
-    <article className="group flex flex-col rounded-card border border-root-dark/5 bg-white p-6 shadow-card transition-smooth hover:-translate-y-1 hover:border-root-coral/20 hover:shadow-lg">
+    <article
+      data-read-aloud-block
+      className="group flex flex-col rounded-card border border-root-dark/5 bg-white p-6 shadow-card transition-smooth hover:-translate-y-1 hover:border-root-coral/20 hover:shadow-lg"
+    >
       <div className="flex items-start justify-between gap-3">
         <h3 className="font-display text-lg text-root-dark transition-smooth group-hover:text-root-coral">
           {name}

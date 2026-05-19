@@ -37,6 +37,7 @@ export default function InfoCard({
 
   const content = (
     <motion.article
+      data-read-aloud-block
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}

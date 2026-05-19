@@ -14,6 +14,12 @@ export type ReadAloudStatus = "idle" | "playing" | "paused";
 
 export type ReadMode = "page" | "selection";
 
+type SessionState = {
+  generation: number;
+  paused: boolean;
+  stopped: boolean;
+};
+
 export function useReadAloud() {
   const [status, setStatus] = useState<ReadAloudStatus>("idle");
   const [chunks, setChunks] = useState<ReadChunk[]>([]);
@@ -29,15 +35,23 @@ export function useReadAloud() {
   const chunksRef = useRef<ReadChunk[]>([]);
   const indexRef = useRef(0);
   const mainRef = useRef<HTMLElement | null>(null);
+  const sessionRef = useRef<SessionState>({
+    generation: 0,
+    paused: false,
+    stopped: true,
+  });
+  const settingsRef = useRef({ rate, pitch, volume, voiceURI, voices });
+
+  useEffect(() => {
+    settingsRef.current = { rate, pitch, volume, voiceURI, voices };
+  }, [rate, pitch, volume, voiceURI, voices]);
 
   const loadVoices = useCallback(() => {
     if (typeof window === "undefined" || !window.speechSynthesis) return;
     const list = filterVoices(window.speechSynthesis.getVoices());
     setVoices(list);
-    if (list.length && !voiceURI) {
-      setVoiceURI(list[0].voiceURI);
-    }
-  }, [voiceURI]);
+    setVoiceURI((current) => current || list[0]?.voiceURI || "");
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -54,7 +68,15 @@ export function useReadAloud() {
     };
   }, [loadVoices]);
 
+  const bumpGeneration = () => {
+    sessionRef.current.generation += 1;
+    return sessionRef.current.generation;
+  };
+
   const stop = useCallback(() => {
+    bumpGeneration();
+    sessionRef.current.stopped = true;
+    sessionRef.current.paused = false;
     window.speechSynthesis?.cancel();
     if (mainRef.current) clearChunkHighlights(mainRef.current);
     setStatus("idle");
@@ -64,85 +86,122 @@ export function useReadAloud() {
     setChunks([]);
   }, []);
 
-  const speakChunk = useCallback(
-    (index: number) => {
-      const list = chunksRef.current;
-      if (!list.length || index >= list.length) {
-        stop();
+  const speakChunk = useCallback((index: number) => {
+    const session = sessionRef.current;
+    if (session.stopped) return;
+
+    const list = chunksRef.current;
+    if (!list.length || index >= list.length) {
+      stop();
+      return;
+    }
+
+    const generation = session.generation;
+    const chunk = list[index];
+    indexRef.current = index;
+    setCurrentIndex(index);
+    highlightChunk(chunk.element);
+
+    const { rate: r, pitch: p, volume: v, voiceURI: uri, voices: voiceList } =
+      settingsRef.current;
+
+    const utterance = new SpeechSynthesisUtterance(chunk.text);
+    utterance.rate = r;
+    utterance.pitch = p;
+    utterance.volume = v;
+
+    const voice = voiceList.find((item) => item.voiceURI === uri);
+    if (voice) utterance.voice = voice;
+
+    utterance.onend = () => {
+      const current = sessionRef.current;
+      if (
+        current.generation !== generation ||
+        current.stopped ||
+        current.paused
+      ) {
         return;
       }
-
-      const chunk = list[index];
-      indexRef.current = index;
-      setCurrentIndex(index);
-      highlightChunk(chunk.element);
-
-      const utterance = new SpeechSynthesisUtterance(chunk.text);
-      utterance.rate = rate;
-      utterance.pitch = pitch;
-      utterance.volume = volume;
-
-      const voice = voices.find((v) => v.voiceURI === voiceURI);
-      if (voice) utterance.voice = voice;
-
-      utterance.onend = () => {
-        if (window.speechSynthesis.paused) return;
+      // Brief gap between sections/cards for clearer transitions
+      window.setTimeout(() => {
+        const after = sessionRef.current;
+        if (
+          after.generation !== generation ||
+          after.stopped ||
+          after.paused
+        ) {
+          return;
+        }
         speakChunk(index + 1);
-      };
+      }, 280);
+    };
 
-      utterance.onerror = () => {
-        if (index < list.length - 1) speakChunk(index + 1);
-        else stop();
-      };
+    utterance.onerror = (event) => {
+      const current = sessionRef.current;
+      if (current.generation !== generation || current.stopped) return;
+      // "interrupted" fires when we cancel to skip — do not advance
+      if (event.error === "interrupted" || event.error === "canceled") return;
+      if (index < list.length - 1) speakChunk(index + 1);
+      else stop();
+    };
 
-      window.speechSynthesis.speak(utterance);
-      setStatus("playing");
-    },
-    [rate, pitch, volume, voices, voiceURI, stop],
-  );
+    window.speechSynthesis.speak(utterance);
+    setStatus(session.paused ? "paused" : "playing");
+  }, [stop]);
 
   const start = useCallback(
     (readMode: ReadMode = "page") => {
       if (!supported || !mainRef.current) return;
 
+      bumpGeneration();
+      sessionRef.current.stopped = false;
+      sessionRef.current.paused = false;
       window.speechSynthesis.cancel();
       clearChunkHighlights(mainRef.current);
 
       let list: ReadChunk[] = [];
+      let activeMode: ReadMode = readMode;
+
       if (readMode === "selection") {
         const selected = getSelectionChunk();
         if (selected) list = [selected];
-        else readMode = "page";
+        else activeMode = "page";
       }
 
-      if (readMode === "page") {
+      if (activeMode === "page") {
         list = getReadableChunks(mainRef.current);
       }
 
       if (!list.length) return;
 
-      setMode(readMode);
+      setMode(activeMode);
       chunksRef.current = list;
       setChunks(list);
       indexRef.current = 0;
       setCurrentIndex(0);
-      speakChunk(0);
+
+      // Chrome needs a tick after cancel before the next speak
+      window.setTimeout(() => speakChunk(0), 50);
     },
     [supported, speakChunk],
   );
 
   const pause = useCallback(() => {
-    if (window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
-      window.speechSynthesis.pause();
-      setStatus("paused");
+    if (!window.speechSynthesis.speaking || window.speechSynthesis.paused) {
+      return;
     }
+    sessionRef.current.paused = true;
+    window.speechSynthesis.pause();
+    setStatus("paused");
   }, []);
 
   const resume = useCallback(() => {
+    if (!sessionRef.current.paused) return;
+    sessionRef.current.paused = false;
     if (window.speechSynthesis.paused) {
       window.speechSynthesis.resume();
-      setStatus("playing");
     }
+    setStatus("playing");
   }, []);
 
   const togglePlayPause = useCallback(() => {
@@ -155,8 +214,13 @@ export function useReadAloud() {
     (delta: number) => {
       const next = indexRef.current + delta;
       if (next < 0 || next >= chunksRef.current.length) return;
+
+      bumpGeneration();
+      sessionRef.current.paused = false;
+      sessionRef.current.stopped = false;
       window.speechSynthesis.cancel();
-      speakChunk(next);
+
+      window.setTimeout(() => speakChunk(next), 80);
     },
     [speakChunk],
   );

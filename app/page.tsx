@@ -16,7 +16,10 @@ export default function HomePage() {
         }}
       />
 
-      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+      <section
+        data-read-aloud-block
+        className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8"
+      >
         <h2 className="text-center font-display text-3xl text-root-dark md:text-4xl">
           Where to start
         </h2>

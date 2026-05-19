@@ -221,7 +221,10 @@ export default function ReadAloudToolbar() {
               <div className="grid grid-cols-2 gap-2">
                 <button
                   type="button"
-                  onClick={() => start("page")}
+                  onClick={() => {
+                    if (isActive) stop();
+                    window.setTimeout(() => start("page"), isActive ? 100 : 0);
+                  }}
                   className={`min-h-11 rounded-card px-3 text-xs font-medium transition-smooth ${
                     mode === "page" && isActive
                       ? "gradient-accent text-white"
@@ -232,7 +235,10 @@ export default function ReadAloudToolbar() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => start("selection")}
+                  onClick={() => {
+                    if (isActive) stop();
+                    window.setTimeout(() => start("selection"), isActive ? 100 : 0);
+                  }}
                   className={`min-h-11 rounded-card px-3 text-xs font-medium transition-smooth ${
                     mode === "selection" && isActive
                       ? "gradient-accent text-white"
@@ -321,7 +327,8 @@ export default function ReadAloudToolbar() {
               </div>
 
               <p className="text-center text-[10px] leading-relaxed text-root-dark/45">
-                Shortcut: Alt+R to play/pause · Alt+S to stop
+                Highlight text first for &ldquo;Read selection&rdquo;. Shortcuts: Alt+R
+                play/pause · Alt+S stop
               </p>
             </div>
           </motion.div>

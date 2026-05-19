@@ -20,6 +20,7 @@ export default function HeroSection({
 }: HeroSectionProps) {
   return (
     <section
+      data-read-aloud-block
       className={`relative overflow-hidden gradient-navy ${compact ? "py-16" : "py-24 md:py-32"}`}
     >
       <div
