@@ -3,25 +3,60 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --navy-start: #1a1a2e;
+  --navy-mid: #16213e;
+  --navy-end: #0f3460;
+  --coral: #e94560;
+  --amber: #f5a623;
+  --surface-start: #f8f9ff;
+  --surface-end: #eef1f8;
+  --text-dark: #1a1a2e;
+  --text-light: #f0f4ff;
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.07);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    @apply font-body text-root-dark antialiased;
+    background: linear-gradient(180deg, var(--surface-start) 0%, var(--surface-end) 100%);
+    min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .gradient-navy {
+    background: linear-gradient(
+      135deg,
+      var(--navy-start) 0%,
+      var(--navy-mid) 50%,
+      var(--navy-end) 100%
+    );
+  }
+
+  .gradient-accent {
+    background: linear-gradient(135deg, var(--coral) 0%, var(--amber) 100%);
+  }
+
+  .gradient-surface {
+    background: linear-gradient(
+      180deg,
+      var(--surface-start) 0%,
+      var(--surface-end) 100%
+    );
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .transition-smooth {
+    transition: all 0.3s ease;
   }
 }
