@@ -1,20 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  X,
-  ChevronDown,
-  Phone,
-  ExternalLink,
-} from "lucide-react";
-import {
-  mainNav,
-  topicNav,
-  resourceNav,
-  additionalSupport,
-} from "@/lib/navigation";
+import { X } from "lucide-react";
+import { mainNav, topicNav, resourceNav } from "@/lib/navigation";
 
 type HamburgerMenuProps = {
   isOpen: boolean;
@@ -22,14 +12,11 @@ type HamburgerMenuProps = {
 };
 
 export default function HamburgerMenu({ isOpen, onClose }: HamburgerMenuProps) {
-  const [supportOpen, setSupportOpen] = useState(false);
-
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
-      setSupportOpen(false);
     }
     return () => {
       document.body.style.overflow = "";
@@ -84,66 +71,6 @@ export default function HamburgerMenu({ isOpen, onClose }: HamburgerMenuProps) {
 
               <SectionLabel>Resources</SectionLabel>
               <NavSection items={resourceNav} onNavigate={onClose} />
-
-              <div className="mt-6 border-t border-white/10 pt-6">
-                <button
-                  type="button"
-                  onClick={() => setSupportOpen(!supportOpen)}
-                  className="flex min-h-12 w-full items-center justify-between rounded-card px-3 text-left text-sm font-medium text-root-light/90 transition-smooth hover:bg-white/5"
-                  aria-expanded={supportOpen}
-                >
-                  <span>Additional Support (click to expand)</span>
-                  <ChevronDown
-                    className={`h-5 w-5 transition-transform duration-300 ${supportOpen ? "rotate-180" : ""}`}
-                  />
-                </button>
-
-                <AnimatePresence>
-                  {supportOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden"
-                    >
-                      <p className="px-3 pb-3 pt-2 text-xs leading-relaxed text-root-light/60">
-                        These resources are here if you need them — no pressure.
-                      </p>
-                      <ul className="space-y-1 px-1">
-                        {additionalSupport.map((item) => (
-                          <li key={item.name}>
-                            <a
-                              href={item.href}
-                              target={item.href.startsWith("http") ? "_blank" : undefined}
-                              rel={
-                                item.href.startsWith("http")
-                                  ? "noopener noreferrer"
-                                  : undefined
-                              }
-                              onClick={onClose}
-                              className="flex min-h-12 items-start gap-3 rounded-card px-3 py-3 text-root-light/80 transition-smooth hover:bg-white/5"
-                            >
-                              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-root-coral" />
-                              <span>
-                                <span className="flex items-center gap-1 text-sm font-medium text-root-light">
-                                  {item.name}
-                                  {item.href.startsWith("http") && (
-                                    <ExternalLink className="h-3 w-3 opacity-60" />
-                                  )}
-                                </span>
-                                <span className="text-xs text-root-light/60">
-                                  {item.description}
-                                </span>
-                              </span>
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
             </nav>
           </motion.aside>
         </>

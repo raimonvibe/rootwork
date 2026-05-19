@@ -39,9 +39,8 @@ export default function AboutPage() {
             support when you need it.
           </p>
           <p>
-            Support lines and mental health resources are available inside the
-            navigation menu under &ldquo;Additional Support&rdquo; — collapsed by
-            default, so you choose when to view them.
+            Rootwork focuses on employment information — exploring work, building
+            confidence, and finding trusted resources at your own pace.
           </p>
         </ContentSection>
 

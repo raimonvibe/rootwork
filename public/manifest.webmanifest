@@ -1,0 +1,29 @@
+{
+  "name": "Rootwork",
+  "short_name": "Rootwork",
+  "description": "Supportive employment information for navigating the world of work.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8f9ff",
+  "theme_color": "#1a1a2e",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "341x350",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/social.png",
+      "sizes": "341x350",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "32x32",
+      "type": "image/x-icon"
+    }
+  ]
+}

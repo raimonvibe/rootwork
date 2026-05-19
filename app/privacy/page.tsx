@@ -42,9 +42,9 @@ export default function PrivacyPage() {
 
         <ContentSection title="Contact" index={3}>
           <p>
-            Rootwork is an educational resource. For professional mental health
-            support, please use the resources in the navigation menu under Additional
-            Support when you are ready.
+            Rootwork is an educational resource about employment and workplace
+            wellbeing. For professional advice, please consult a qualified provider
+            in your area.
           </p>
         </ContentSection>
       </div>
