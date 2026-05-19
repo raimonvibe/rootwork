@@ -24,6 +24,8 @@ export default function ResourcesPage() {
               name={source.name}
               description={source.description}
               url={source.url}
+              alternateUrl={source.alternateUrl}
+              alternateLabel={source.alternateLabel}
             />
           ))}
         </div>

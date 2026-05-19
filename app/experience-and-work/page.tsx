@@ -19,10 +19,13 @@ export default function ExperienceAndWorkPage() {
         <ContentSection
           title="What are early life experiences?"
           index={0}
-          source={{
-            name: "SAMHSA & CDC ACE Study",
-            url: "https://www.cdc.gov/violenceprevention/aces/index.html",
-          }}
+          sources={[
+            { name: "SAMHSA", url: "https://www.samhsa.gov/" },
+            {
+              name: "CDC — ACE Study",
+              url: "https://www.cdc.gov/violenceprevention/aces/index.html",
+            },
+          ]}
         >
           <p>
             Early life experiences are events from childhood that can shape how we

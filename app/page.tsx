@@ -56,13 +56,16 @@ export default function HomePage() {
           Information drawn from trusted organizations
         </p>
         <div className="mt-6 flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
-          {sourceStrip.map((name) => (
-            <span
-              key={name}
-              className="shrink-0 rounded-card border border-root-dark/10 bg-white px-6 py-3 text-sm font-medium text-root-dark shadow-card"
+          {sourceStrip.map((item) => (
+            <a
+              key={item.name}
+              href={item.url}
+              target="_blank"
+              rel="noopener"
+              className="shrink-0 rounded-card border border-root-dark/10 bg-white px-6 py-3 text-sm font-medium text-root-dark shadow-card transition-smooth hover:border-root-coral/30 hover:text-root-coral"
             >
-              {name}
-            </span>
+              {item.name}
+            </a>
           ))}
         </div>
       </section>

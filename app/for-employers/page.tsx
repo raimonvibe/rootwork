@@ -19,10 +19,10 @@ export default function ForEmployersPage() {
         <ContentSection
           title="What is a supportive workplace?"
           index={0}
-          source={{
-            name: "CTIPP & SAMHSA",
-            url: "https://ctipp.org/",
-          }}
+          sources={[
+            { name: "CTIPP", url: "https://ctipp.org/" },
+            { name: "SAMHSA", url: "https://www.samhsa.gov/" },
+          ]}
         >
           <p>
             A supportive workplace recognizes that many employees bring varied life

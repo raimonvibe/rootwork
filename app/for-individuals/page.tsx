@@ -68,10 +68,10 @@ export default function ForIndividualsPage() {
         <ContentSection
           title="Support programs"
           index={3}
-          source={{
-            name: "WorkforceGPS & NYEC",
-            url: "https://workforcegps.org/",
-          }}
+          sources={[
+            { name: "WorkforceGPS", url: "https://workforcegps.org/" },
+            { name: "NYEC", url: "https://nyec.org/" },
+          ]}
         >
           <p>
             Programs like Mobility Mentoring (Center for Working Families), the
