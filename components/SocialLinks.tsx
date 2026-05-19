@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { raimonSocialLinks } from "@/lib/socialLinks";
 
 type SocialLinksProps = {
@@ -19,11 +20,17 @@ export default function SocialLinks({
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className={`group flex min-h-11 min-w-11 items-center justify-center rounded-card border border-root-light/15 bg-root-light/10 transition-smooth hover:text-white ${link.hoverClass}`}
+              className="social-link group flex min-h-11 min-w-11 items-center justify-center rounded-card border border-root-light/15 bg-root-light/10 transition-smooth"
+              style={
+                {
+                  "--brand": link.brandColor,
+                  "--brand-hover": link.hoverColor ?? link.brandColor,
+                } as CSSProperties
+              }
               aria-label={link.label}
             >
               <i
-                className={`${link.iconClass} text-lg transition-smooth group-hover:scale-110 group-hover:text-white ${link.iconColor}`}
+                className={`${link.iconClass} text-lg transition-smooth group-hover:scale-110`}
                 aria-hidden
               />
               <span className="sr-only">{link.label}</span>

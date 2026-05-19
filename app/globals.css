@@ -75,4 +75,22 @@
     @apply rounded-lg bg-root-coral/15 ring-2 ring-root-coral/40;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
   }
+
+  .social-link {
+    --brand: #f0f4ff;
+    --brand-hover: var(--brand);
+  }
+
+  .social-link i {
+    color: var(--brand);
+  }
+
+  .social-link:hover {
+    background-color: var(--brand-hover);
+    border-color: var(--brand-hover);
+  }
+
+  .social-link:hover i {
+    color: #fff;
+  }
 }
