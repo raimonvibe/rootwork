@@ -3,6 +3,7 @@ import { DM_Serif_Display, Plus_Jakarta_Sans } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ReadAloudToolbar from "@/components/ReadAloudToolbar";
+import ViewportInsetsProvider from "@/components/ViewportInsetsProvider";
 import "./globals.css";
 
 const dmSerif = DM_Serif_Display({
@@ -79,6 +80,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: "#1a1a2e",
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -95,6 +97,7 @@ export default function RootLayout({
         />
       </head>
       <body className="flex min-h-screen flex-col">
+        <ViewportInsetsProvider />
         <Navbar />
         <main id="main-content" className="flex-1">
           {children}

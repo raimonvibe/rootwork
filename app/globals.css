@@ -16,8 +16,27 @@
 }
 
 @layer base {
+  :root {
+    --vv-height: 100dvh;
+    --vv-offset-top: 0px;
+    --vv-offset-bottom: 0px;
+  }
+
   body {
     @apply font-body text-root-dark antialiased;
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    isolation: isolate;
+  }
+
+  /* Fixed background on a layer behind content — avoids iOS Safari breaking
+     position:fixed children when background-attachment: fixed is on body. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
     background-color: var(--surface-end);
     background-image:
       linear-gradient(
@@ -28,9 +47,8 @@
       url("/ginger.png");
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
     background-repeat: no-repeat;
-    min-height: 100vh;
+    pointer-events: none;
   }
 
   h1,
@@ -104,5 +122,30 @@
   .social-link[data-social="medium"] {
     --brand: #00ab6c;
     --brand-hover: #00ab6c;
+  }
+
+  .fixed-viewport-anchor {
+    position: fixed;
+    right: max(1rem, env(safe-area-inset-right, 0px));
+    bottom: calc(
+      max(1rem, env(safe-area-inset-bottom, 0px)) + var(--vv-offset-bottom, 0px)
+    );
+    left: auto;
+    top: auto;
+    max-width: min(100vw - 2rem, 22rem);
+  }
+
+  .fixed-viewport-panel {
+    width: min(calc(100vw - 2rem), 22rem);
+    max-height: min(
+      70dvh,
+      calc(
+        var(--vv-height, 100dvh) - 7rem - env(safe-area-inset-top, 0px) -
+          var(--vv-offset-bottom, 0px)
+      )
+    );
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
   }
 }

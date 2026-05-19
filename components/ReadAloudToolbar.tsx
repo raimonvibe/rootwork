@@ -13,6 +13,7 @@ import {
   Volume2,
   X,
 } from "lucide-react";
+import FixedViewportLayer from "@/components/FixedViewportLayer";
 import { useReadAloud } from "@/hooks/useReadAloud";
 import { formatVoiceLabel } from "@/lib/readAloud";
 
@@ -77,10 +78,10 @@ export default function ReadAloudToolbar() {
   if (!supported) return null;
 
   return (
-    <div
-      data-read-aloud-ignore
-      className="fixed bottom-4 right-4 z-40 flex flex-col items-end gap-3 sm:bottom-6 sm:right-6"
+    <FixedViewportLayer
+      className="flex flex-col items-end gap-3 sm:bottom-6 sm:right-6 [&>*]:pointer-events-auto"
     >
+      <div data-read-aloud-ignore className="contents">
       <div role="status" aria-live="polite" className="sr-only">
         {statusMessage}
       </div>
@@ -92,7 +93,7 @@ export default function ReadAloudToolbar() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.96 }}
             transition={{ type: "spring", stiffness: 380, damping: 28 }}
-            className="w-[min(100vw-2rem,22rem)] overflow-hidden rounded-card border border-root-dark/10 bg-white/95 shadow-[0_8px_40px_rgba(26,26,46,0.18)] backdrop-blur-xl"
+            className="fixed-viewport-panel overflow-hidden rounded-card border border-root-dark/10 bg-white/95 shadow-[0_8px_40px_rgba(26,26,46,0.18)] backdrop-blur-xl"
             role="region"
             aria-label="Listen to this page"
           >
@@ -361,6 +362,7 @@ export default function ReadAloudToolbar() {
           Listen
         </span>
       </motion.button>
-    </div>
+      </div>
+    </FixedViewportLayer>
   );
 }
