@@ -1,0 +1,110 @@
+import type { Metadata, Viewport } from "next";
+import { DM_Serif_Display, Plus_Jakarta_Sans } from "next/font/google";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import ReadAloudToolbar from "@/components/ReadAloudToolbar";
+import ViewportInsetsProvider from "@/components/ViewportInsetsProvider";
+import "./globals.css";
+
+const dmSerif = DM_Serif_Display({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-dm-serif",
+  display: "swap",
+});
+
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-plus-jakarta",
+  display: "swap",
+});
+
+const SITE_URL = "https://rootwork-teal.vercel.app";
+
+const siteDescription =
+  "Warm, practical guidance for young people who experienced hard things early in life and want to get back to work — plus resources for employers who want to welcome them.";
+
+function getMetadataBase(): URL {
+  if (process.env.NEXT_PUBLIC_SITE_URL) {
+    return new URL(process.env.NEXT_PUBLIC_SITE_URL);
+  }
+  if (process.env.VERCEL_URL) {
+    return new URL(`https://${process.env.VERCEL_URL}`);
+  }
+  return new URL(SITE_URL);
+}
+
+export const metadata: Metadata = {
+  metadataBase: getMetadataBase(),
+  alternates: {
+    canonical: "/",
+  },
+  title: {
+    default: "Rootwork — Supportive Employment Information",
+    template: "%s | Rootwork",
+  },
+  description: siteDescription,
+  applicationName: "Rootwork",
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: "/favicon.ico",
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
+  appleWebApp: {
+    capable: true,
+    title: "Rootwork",
+    statusBarStyle: "default",
+  },
+  openGraph: {
+    title: "Rootwork",
+    description: siteDescription,
+    type: "website",
+    siteName: "Rootwork",
+    locale: "en_US",
+    images: [
+      {
+        url: "/social.png",
+        width: 341,
+        height: 350,
+        alt: "Rootwork — supportive employment information",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Rootwork",
+    description: siteDescription,
+    images: ["/social.png"],
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#1a1a2e",
+  viewportFit: "cover",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" className={`${dmSerif.variable} ${plusJakarta.variable}`}>
+      <head>
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="flex min-h-screen flex-col">
+        <ViewportInsetsProvider />
+        <Navbar />
+        <main id="main-content" className="flex-1">
+          {children}
+        </main>
+        <Footer />
+        <ReadAloudToolbar />
+      </body>
+    </html>
+  );
+}

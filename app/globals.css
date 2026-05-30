@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navy-start: #1a1a2e;
+  --navy-mid: #16213e;
+  --navy-end: #0f3460;
+  --coral: #e94560;
+  --amber: #f5a623;
+  --surface-start: #f8f9ff;
+  --surface-end: #eef1f8;
+  --text-dark: #1a1a2e;
+  --text-light: #f0f4ff;
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.07);
+}
+
+@layer base {
+  :root {
+    --vv-height: 100dvh;
+    --vv-offset-top: 0px;
+    --vv-offset-bottom: 0px;
+  }
+
+  body {
+    @apply font-body text-root-dark antialiased;
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    isolation: isolate;
+  }
+
+  /* Fixed background on a layer behind content — avoids iOS Safari breaking
+     position:fixed children when background-attachment: fixed is on body. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-color: var(--surface-end);
+    background-image:
+      linear-gradient(
+        180deg,
+        rgba(248, 249, 255, 0.9) 0%,
+        rgba(238, 241, 248, 0.85) 100%
+      ),
+      url("/ginger.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .gradient-navy {
+    background: linear-gradient(
+      135deg,
+      var(--navy-start) 0%,
+      var(--navy-mid) 50%,
+      var(--navy-end) 100%
+    );
+  }
+
+  .gradient-accent {
+    background: linear-gradient(135deg, var(--coral) 0%, var(--amber) 100%);
+  }
+
+  .gradient-surface {
+    background: linear-gradient(
+      180deg,
+      var(--surface-start) 0%,
+      var(--surface-end) 100%
+    );
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .transition-smooth {
+    transition: all 0.3s ease;
+  }
+
+  .read-aloud-active {
+    @apply rounded-lg bg-root-coral/15 ring-2 ring-root-coral/40;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .social-link {
+    --brand: #f0f4ff;
+    --brand-hover: var(--brand);
+  }
+
+  .social-link i,
+  .social-link i::before {
+    color: var(--brand);
+  }
+
+  .social-link:hover {
+    background-color: var(--brand-hover);
+    border-color: var(--brand-hover);
+  }
+
+  .social-link:hover i,
+  .social-link:hover i::before {
+    color: #fff;
+  }
+
+  .social-link[data-social="x"] {
+    --brand: #ffffff;
+    --brand-hover: #000000;
+  }
+
+  .social-link[data-social="medium"] {
+    --brand: #00ab6c;
+    --brand-hover: #00ab6c;
+  }
+
+  .fixed-viewport-anchor {
+    position: fixed;
+    right: max(1rem, env(safe-area-inset-right, 0px));
+    bottom: calc(
+      max(1rem, env(safe-area-inset-bottom, 0px)) + var(--vv-offset-bottom, 0px)
+    );
+    left: auto;
+    top: auto;
+    max-width: min(100vw - 2rem, 22rem);
+  }
+
+  .fixed-viewport-panel {
+    width: min(calc(100vw - 2rem), 22rem);
+    max-height: min(
+      70dvh,
+      calc(
+        var(--vv-height, 100dvh) - 7rem - env(safe-area-inset-top, 0px) -
+          var(--vv-offset-bottom, 0px)
+      )
+    );
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+}
