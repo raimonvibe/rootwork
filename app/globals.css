@@ -1,18 +1,148 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-:root {
-  --navy-start: #1a1a2e;
-  --navy-mid: #16213e;
-  --navy-end: #0f3460;
-  --coral: #e94560;
-  --amber: #f5a623;
-  --surface-start: #f8f9ff;
-  --surface-end: #eef1f8;
-  --text-dark: #1a1a2e;
-  --text-light: #f0f4ff;
-  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.07);
+@theme {
+  --color-root-dark: #1a1a2e;
+  --color-root-navy: #16213e;
+  --color-root-deep: #0f3460;
+  --color-root-coral: #e94560;
+  --color-root-amber: #f5a623;
+  --color-root-light: #f0f4ff;
+  --color-root-surface: #f8f9ff;
+
+  --font-display: var(--font-dm-serif), Georgia, serif;
+  --font-body: var(--font-plus-jakarta), system-ui, sans-serif;
+
+  --radius-card: 16px;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility gradient-navy {
+  background: linear-gradient(
+    135deg,
+    var(--navy-start) 0%,
+    var(--navy-mid) 50%,
+    var(--navy-end) 100%
+  );
+}
+
+@utility gradient-accent {
+  background: linear-gradient(135deg, var(--coral) 0%, var(--amber) 100%);
+}
+
+@utility gradient-surface {
+  background: linear-gradient(
+    180deg,
+    var(--surface-start) 0%,
+    var(--surface-end) 100%
+  );
+}
+
+@utility shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+@utility transition-smooth {
+  transition: all 0.3s ease;
+}
+
+@utility read-aloud-active {
+  @apply rounded-lg bg-root-coral/15 ring-2 ring-root-coral/40;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+@utility social-link {
+  --brand: #f0f4ff;
+  --brand-hover: var(--brand);
+
+  & i {
+    color: var(--brand);
+  }
+
+  & i::before {
+    color: var(--brand);
+  }
+
+  &:hover {
+    background-color: var(--brand-hover);
+    border-color: var(--brand-hover);
+  }
+
+  &:hover i {
+    color: #fff;
+  }
+
+  &:hover i::before {
+    color: #fff;
+  }
+
+  &[data-social='x'] {
+    --brand: #ffffff;
+    --brand-hover: #000000;
+  }
+
+  &[data-social='medium'] {
+    --brand: #00ab6c;
+    --brand-hover: #00ab6c;
+  }
+}
+
+@utility fixed-viewport-anchor {
+  position: fixed;
+  right: max(1rem, env(safe-area-inset-right, 0px));
+  bottom: calc(
+    max(1rem, env(safe-area-inset-bottom, 0px)) + var(--vv-offset-bottom, 0px)
+  );
+  left: auto;
+  top: auto;
+  max-width: min(100vw - 2rem, 22rem);
+}
+
+@utility fixed-viewport-panel {
+  width: min(calc(100vw - 2rem), 22rem);
+  max-height: min(
+    70dvh,
+    calc(
+      var(--vv-height, 100dvh) - 7rem - env(safe-area-inset-top, 0px) -
+        var(--vv-offset-bottom, 0px)
+    )
+  );
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+@layer utilities {
+  :root {
+    --navy-start: #1a1a2e;
+    --navy-mid: #16213e;
+    --navy-end: #0f3460;
+    --coral: #e94560;
+    --amber: #f5a623;
+    --surface-start: #f8f9ff;
+    --surface-end: #eef1f8;
+    --text-dark: #1a1a2e;
+    --text-light: #f0f4ff;
+    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.07);
+  }
 }
 
 @layer base {
@@ -56,96 +186,5 @@
   h3,
   h4 {
     @apply font-display;
-  }
-}
-
-@layer utilities {
-  .gradient-navy {
-    background: linear-gradient(
-      135deg,
-      var(--navy-start) 0%,
-      var(--navy-mid) 50%,
-      var(--navy-end) 100%
-    );
-  }
-
-  .gradient-accent {
-    background: linear-gradient(135deg, var(--coral) 0%, var(--amber) 100%);
-  }
-
-  .gradient-surface {
-    background: linear-gradient(
-      180deg,
-      var(--surface-start) 0%,
-      var(--surface-end) 100%
-    );
-  }
-
-  .shadow-card {
-    box-shadow: var(--shadow-card);
-  }
-
-  .transition-smooth {
-    transition: all 0.3s ease;
-  }
-
-  .read-aloud-active {
-    @apply rounded-lg bg-root-coral/15 ring-2 ring-root-coral/40;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .social-link {
-    --brand: #f0f4ff;
-    --brand-hover: var(--brand);
-  }
-
-  .social-link i,
-  .social-link i::before {
-    color: var(--brand);
-  }
-
-  .social-link:hover {
-    background-color: var(--brand-hover);
-    border-color: var(--brand-hover);
-  }
-
-  .social-link:hover i,
-  .social-link:hover i::before {
-    color: #fff;
-  }
-
-  .social-link[data-social="x"] {
-    --brand: #ffffff;
-    --brand-hover: #000000;
-  }
-
-  .social-link[data-social="medium"] {
-    --brand: #00ab6c;
-    --brand-hover: #00ab6c;
-  }
-
-  .fixed-viewport-anchor {
-    position: fixed;
-    right: max(1rem, env(safe-area-inset-right, 0px));
-    bottom: calc(
-      max(1rem, env(safe-area-inset-bottom, 0px)) + var(--vv-offset-bottom, 0px)
-    );
-    left: auto;
-    top: auto;
-    max-width: min(100vw - 2rem, 22rem);
-  }
-
-  .fixed-viewport-panel {
-    width: min(calc(100vw - 2rem), 22rem);
-    max-height: min(
-      70dvh,
-      calc(
-        var(--vv-height, 100dvh) - 7rem - env(safe-area-inset-top, 0px) -
-          var(--vv-offset-bottom, 0px)
-      )
-    );
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
   }
 }
