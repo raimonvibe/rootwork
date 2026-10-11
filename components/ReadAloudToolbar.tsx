@@ -79,7 +79,7 @@ export default function ReadAloudToolbar() {
 
   return (
     <FixedViewportLayer
-      className="flex flex-col items-end gap-3 sm:bottom-6 sm:right-6 [&>*]:pointer-events-auto"
+      className="flex flex-col items-end gap-3 sm:bottom-6 sm:right-6 *:pointer-events-auto"
     >
       <div data-read-aloud-ignore className="contents">
       <div role="status" aria-live="polite" className="sr-only">
@@ -262,7 +262,7 @@ export default function ReadAloudToolbar() {
                         key={s}
                         type="button"
                         onClick={() => setRate(s)}
-                        className={`min-h-9 min-w-[3rem] rounded-lg px-2 text-xs font-medium transition-smooth ${
+                        className={`min-h-9 min-w-12 rounded-lg px-2 text-xs font-medium transition-smooth ${
                           rate === s
                             ? "bg-root-dark text-root-light"
                             : "bg-root-dark/5 text-root-dark hover:bg-root-dark/10"
@@ -281,7 +281,7 @@ export default function ReadAloudToolbar() {
                   <select
                     value={voiceURI}
                     onChange={(e) => setVoiceURI(e.target.value)}
-                    className="w-full min-h-11 rounded-card border border-root-dark/10 bg-white px-3 text-xs text-root-dark focus:border-root-coral focus:outline-none focus:ring-2 focus:ring-root-coral/20"
+                    className="w-full min-h-11 rounded-card border border-root-dark/10 bg-white px-3 text-xs text-root-dark focus:border-root-coral focus:outline-hidden focus:ring-2 focus:ring-root-coral/20"
                     aria-label="Reading voice"
                   >
                     {voices.map((v) => (
@@ -358,7 +358,7 @@ export default function ReadAloudToolbar() {
         ) : (
           <Mic className="relative h-6 w-6 text-root-light transition-transform group-hover:scale-105" />
         )}
-        <span className="absolute -right-1 -top-1 flex h-5 items-center rounded-full bg-white px-1.5 text-[9px] font-bold uppercase tracking-wide text-root-coral shadow-sm">
+        <span className="absolute -right-1 -top-1 flex h-5 items-center rounded-full bg-white px-1.5 text-[9px] font-bold uppercase tracking-wide text-root-coral shadow-xs">
           Listen
         </span>
       </motion.button>
